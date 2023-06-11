@@ -27,8 +27,7 @@ public class ShopingmallController {
         member.setName(memberForm.getName());
         member.setPassword(memberForm.getPassword());
         member.setDescription(memberForm.getDescription());
-        //
-        System.out.println(member);
-        return "redirect:/";
+        System.out.println(member.getName());
+        return "redirect:/main";
     }
 }
