@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Member {
-    @Column
+    @Column()
     private String name;
     @Id
     private String id;
