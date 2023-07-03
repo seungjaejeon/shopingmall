@@ -2,18 +2,16 @@ package com.shopingmall.seungjae.controller;
 
 import com.shopingmall.seungjae.domain.Member;
 import com.shopingmall.seungjae.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@Slf4j @RequestMapping("member/signup")
+@Slf4j @RequestMapping("member/signup") @RequiredArgsConstructor
 public class ShoppingMallMemberJoinController {
     private final MemberService memberService;
-
-    public ShoppingMallMemberJoinController(MemberService memberService) {
-        this.memberService = memberService;
-    }
     @GetMapping
     public String JoinPage(){
         return "join/joinPage";

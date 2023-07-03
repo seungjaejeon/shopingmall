@@ -30,7 +30,7 @@
             justify-content: space-between;
         }
 
-        button {
+        .button-group button {
             padding: 10px 20px;
             background-color: #4285f4;
             color: #fff;
@@ -38,6 +38,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -46,8 +47,15 @@
     <span>로그인 사용자: <span th:text="${member.name}"></span></span>
   </div>
   <div class="button-group">
-    <button onclick="manageProducts()">상품 관리</button>
-    <button onclick="logout()">로그아웃</button>
+    <button class="w-100 btn btn-secondary btn-lg" type="button"
+            th:onclick="|location.href='@{/items}'|">
+      상품 관리
+    </button>
+    <form th:action="@{/member/logout}" method="post">
+      <button class="w-100 btn btn-dark btn-lg" type="submit">
+        로그아웃
+      </button>
+    </form>
   </div>
 </div>
 </body>
