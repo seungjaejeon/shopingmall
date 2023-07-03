@@ -1,10 +1,9 @@
-package com.shopingmall.seungjae.controller;
+package com.shopingmall.seungjae.controller.Member;
 
 import com.shopingmall.seungjae.domain.Member;
 import com.shopingmall.seungjae.service.LoginService;
 import com.shopingmall.seungjae.service.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

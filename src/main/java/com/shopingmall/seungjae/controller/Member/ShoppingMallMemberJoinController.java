@@ -1,4 +1,4 @@
-package com.shopingmall.seungjae.controller;
+package com.shopingmall.seungjae.controller.Member;
 
 import com.shopingmall.seungjae.domain.Member;
 import com.shopingmall.seungjae.service.MemberService;

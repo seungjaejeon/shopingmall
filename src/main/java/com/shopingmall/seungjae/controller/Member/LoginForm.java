@@ -1,4 +1,4 @@
-package com.shopingmall.seungjae.controller;
+package com.shopingmall.seungjae.controller.Member;
 
 import lombok.Data;
 
