@@ -48,4 +48,13 @@ public class ShoppingMallItemController {
         model.addAttribute("item", itemNotNull);
         return "item/item";
     }
+    @PostMapping("/item/{itemName}")
+    public String ItemDelete(@PathVariable(name = "itemName") String findItemName, Model model) {
+        Optional<Item> item = itemRepository.findByName(findItemName);
+        Item itemNotNull = item.orElse(null); // Optional 객체 언랩
+        log.info("deleteItem = {}",itemNotNull);
+        itemRepository.delete(itemNotNull.getItemId());
+        return "redirect:/items";
+    }
+
 }
