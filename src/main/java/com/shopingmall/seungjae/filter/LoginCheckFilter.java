@@ -29,7 +29,7 @@ public class LoginCheckFilter implements Filter {
                 HttpSession session = httpRequest.getSession(false);
                 if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
                     log.info("비인증 사용자 요청{}", requestURI);
-                    httpResponse.sendRedirect("member/login?redirectURL=" + requestURI); //redirectURL 로그인하면 다시 원래페이지로 redirect함
+                    httpResponse.sendRedirect("member/login?redirectURL=" + requestURI); //redirectURL 로그인하면 다시 원래페이지로 redirect함 사용자친화적
                     return;
                 }
             }
