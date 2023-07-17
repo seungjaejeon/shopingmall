@@ -48,6 +48,7 @@ public class ShoppingMallItemController {
         model.addAttribute("item", itemNotNull);
         return "item/item";
     }
+
     @PostMapping("/item/{itemName}")
     public String ItemDelete(@PathVariable(name = "itemName") String findItemName, Model model) {
         Optional<Item> item = itemRepository.findByName(findItemName);
