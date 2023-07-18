@@ -1,4 +1,4 @@
-package com.shopingmall.seungjae.filter;
+package com.shopingmall.seungjae.interceptor.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

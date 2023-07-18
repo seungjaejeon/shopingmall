@@ -1,16 +1,11 @@
 package com.shopingmall.seungjae.service;
 
-import com.shopingmall.seungjae.filter.LogFilter;
-import com.shopingmall.seungjae.filter.LoginCheckFilter;
 import com.shopingmall.seungjae.interceptor.LogInterceptor;
 import com.shopingmall.seungjae.interceptor.LoginCheckInterceptor;
 import com.shopingmall.seungjae.repository.ItemRepository;
 import com.shopingmall.seungjae.repository.ItemRepositoryImpl;
 import com.shopingmall.seungjae.repository.MemberRepository;
 import com.shopingmall.seungjae.repository.MemberRepositoryImpl;
-import jakarta.servlet.Filter;
-import lombok.extern.java.Log;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
