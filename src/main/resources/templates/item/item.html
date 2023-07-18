@@ -30,6 +30,9 @@
     .item-info span {
       margin-left: 10px;
     }
+    .error{
+        color:red;
+    }
   </style>
 </head>
 <body>
@@ -62,6 +65,8 @@
 
 <form th:action="@{/items/item/{itemName}(itemName=${item.itemName})}" method="post">
     <button type="submit">상품 삭제하기</button>
+    <p th:if="${deleteError}" th:text="${deleteError}" class="error">에러메시지</p>
 </form>
+
 </body>
 </html>
