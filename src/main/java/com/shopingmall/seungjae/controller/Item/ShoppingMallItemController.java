@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +31,27 @@ public class ShoppingMallItemController {
     }
 
     @GetMapping("/add")
-    public String AddPage() {
+    public String AddPage(@ModelAttribute Item item,Model model) {
+        model.addAttribute("items", item);
         return "item/addItemForm";
     }
 
     @PostMapping("/add")
-    public String AddItem(@ModelAttribute Item item, Model model) {
+    public String AddItem(@ModelAttribute Item item, BindingResult bindingResult) {
         item.setSellerName("me");
+        if (!StringUtils.hasText(item.getItemName())){
+            bindingResult.addError(new FieldError("items","itemName", "상품 이름이 올바르지 않습니다."));
+        }
+        if (item.getPrice()<0){
+            bindingResult.addError(new FieldError("items","price", "상품 가격이 올바르지 않습니다."));
+        }
+        if (!StringUtils.hasText(item.getItemName())){
+            bindingResult.addError(new FieldError("items","itemDescription", "상품 설명이 올바르지 않습니다."));
+        }
+        if (bindingResult.hasErrors()) {
+            log.info("상품 추가 오류 발생 bindingResult = {}",bindingResult);
+            return "item/addItemForm";
+        }
         itemRepository.save(item);
         log.info("item add ={}",item);
         return "redirect:/items";

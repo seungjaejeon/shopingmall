@@ -9,7 +9,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Controller  @Slf4j
@@ -57,14 +59,16 @@ public class ShoppingMallMemberLoginController {
 @PostMapping("/login")
 public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult
         bindingResult, @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
-    if (bindingResult.hasErrors()) {
-        return "login/loginForm";
-    }
+
     Member loginMember = loginService.login(form.getLoginId(),
             form.getPassword());
     log.info("login? {}", loginMember);
     if (loginMember == null) {
         return "login/loginError";
+//        bindingResult.addError(new FieldError("login", "loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요"));
+    }
+    if (bindingResult.hasErrors()) {
+        return "login/loginPage";
     }
     //로그인 성공 처리
     //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성

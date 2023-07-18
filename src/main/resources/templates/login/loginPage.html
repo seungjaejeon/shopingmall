@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -41,12 +41,15 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        .error{
+            color : red;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>로그인</h2>
-    <form action="/member/login" method="post">
+    <form action="/member/login"   method="post">
         <div class="form-group">
             <label for="loginId">아이디</label>
             <input type="text" id="loginId" name="loginId" placeholder="아이디를 입력하세요">
@@ -56,6 +59,8 @@
             <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
         </div>
         <button type="submit">로그인</button>
+        <button type="button" onclick="location.href='/';">홈으로 돌아가기</button>
+
     </form>
 </div>
 

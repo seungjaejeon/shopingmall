@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>제품 추가</title>
@@ -42,23 +42,36 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    .error-message{
+        color: red;
+    }
   </style>
 </head>
 <body>
 <div class="content">
     <h1 class="header">제품 등록</h1>
-    <form action="/items/add" method="post">
+    <form action="/items/add" method="post" th:object="${items}">
         <div class="form-group">
             <label for="itemName">제품명:</label>
-            <input type="text" id="itemName" name="itemName" required>
+            <input type="text" id="itemName" th:filed="*{itemName}" name="itemName" required>
+        </div>
+        <div th:errors="*{itemName}"  class="error-message">
+            <p>제품명 오류 메시지</p>
         </div>
         <div class="form-group">
             <label for="price">가격:</label>
-            <input type="number" id="price" name="price" required>
+            <input type="number" id="price" th:filed="*{price}" name="price" required>
+<!--           가격 제약조건: 음수 xx 정수여야함-->
+        </div>
+        <div th:errors="*{price}"  class="error-message">
+            <p>가격 오류 메시지</p>
         </div>
         <div class="form-group">
             <label for="itemDescription">설명:</label>
-            <input type="text" id="itemDescription" name="itemDescription" required>
+            <input type="text" id="itemDescription" th:filed="*{itemDescription}" name="itemDescription" required>
+        </div>
+        <div th:errors="*{itemDescription}"  class="error-message">
+            <p>상품 설명 오류 메시지</p>
         </div>
         <div class="form-group">
             <button type="submit">추가</button>
