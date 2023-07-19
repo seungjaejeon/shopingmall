@@ -14,4 +14,6 @@ public class Item {
     private Long itemId;
     @NotEmpty
     private String sellerName;
+    @NotEmpty
+    private String sellerId;
 }

@@ -53,6 +53,7 @@ public class ShoppingMallItemController {
             log.info("상품 추가 오류 발생 bindingResult = {}",bindingResult);
             return "item/addItemForm";
         }
+        item.setSellerId(loginMember.getLoginId());
         item.setSellerName(loginMember.getName());
         itemRepository.save(item);
         log.info("item add ={}",item);
@@ -71,7 +72,7 @@ public class ShoppingMallItemController {
     public String ItemDelete(@PathVariable(name = "itemId") Long findItemId, Model model,
                              @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         Item item = itemRepository.findById(findItemId);
-        if(loginMember.getName().equals(item.getSellerName())&&loginMember!=null&&item!=null) {
+        if(loginMember.getLoginId().equals(item.getSellerId())&&loginMember.getName().equals(item.getSellerName())&&loginMember!=null&&item!=null) {
             log.info("deleteItem = {}", item);
             itemRepository.delete(item.getItemId());
             return "redirect:/items";
