@@ -20,7 +20,7 @@ public class ShoppingMallMemberLoginController {
     private final SessionManager sessionManager;
     private final LoginService loginService;
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage(Model model){
         return "login/loginPage";
     }
 //    @PostMapping
@@ -57,18 +57,15 @@ public class ShoppingMallMemberLoginController {
         return "redirect:/";
 }*/
 @PostMapping("/login")
-public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult
-        bindingResult, @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
+public String loginV4(@Valid @ModelAttribute LoginForm form, Model model, @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
 
     Member loginMember = loginService.login(form.getLoginId(),
             form.getPassword());
     log.info("login? {}", loginMember);
     if (loginMember == null) {
-        return "login/loginError";
-//        bindingResult.addError(new FieldError("login", "loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요"));
-    }
-    if (bindingResult.hasErrors()) {
+        model.addAttribute("loginError","아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요.");
         return "login/loginPage";
+//        bindingResult.addError(new FieldError("login", "loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요"));
     }
     //로그인 성공 처리
     //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
