@@ -63,7 +63,7 @@
     <button type="button" onclick="location.href='/items';">목록으로 돌아가기</button>
 </div>
 
-<form th:action="@{/items/item/{itemName}(itemName=${item.itemName})}" method="post">
+<form th:action="@{/items/item/{itemId}(itemId=${item.itemId})}" method="post">
     <button type="submit">상품 삭제하기</button>
     <p th:if="${deleteError}" th:text="${deleteError}" class="error">에러메시지</p>
 </form>

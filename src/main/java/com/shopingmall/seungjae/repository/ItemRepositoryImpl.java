@@ -19,6 +19,11 @@ public class ItemRepositoryImpl implements ItemRepository{
     private static long sequence = 0L;
 
     @Override
+    public Item findById(Long Id) {
+        Item item = itemStore.get(Id);
+        return item;
+    }
+    @Override
     public Item save(Item item) {
         item.setItemId(++sequence);
         itemStore.put(item.getItemId(), item);

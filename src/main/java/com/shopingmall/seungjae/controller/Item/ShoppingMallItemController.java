@@ -59,27 +59,25 @@ public class ShoppingMallItemController {
         return "redirect:/items";
     }
 
-    @GetMapping("/item/{itemName}")
-    public String ItemInformation(@PathVariable(name = "itemName") String findItemName, Model model) {
-        Optional<Item> item = itemRepository.findByName(findItemName);
-        Item itemNotNull = item.orElse(null); // Optional 객체 언랩
-        log.info("findItem = {}",itemNotNull);
-        model.addAttribute("item", itemNotNull);
+    @GetMapping("/item/{itemId}")
+    public String ItemInformation(@PathVariable(name = "itemId") Long findItemId, Model model) {
+        Item item = itemRepository.findById(findItemId);
+        log.info("findItem = {}",item);
+        model.addAttribute("item", item);
         return "item/item";
     }
 
-    @PostMapping("/item/{itemName}")
-    public String ItemDelete(@PathVariable(name = "itemName") String findItemName, Model model,
+    @PostMapping("/item/{itemId}")
+    public String ItemDelete(@PathVariable(name = "itemId") Long findItemId, Model model,
                              @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
-        Optional<Item> item = itemRepository.findByName(findItemName);
-        Item itemNotNull = item.orElse(null); // Optional 객체 언랩
-        if(loginMember.getName().equals(itemNotNull.getSellerName())&&loginMember!=null&&itemNotNull!=null) {
-            log.info("deleteItem = {}", itemNotNull);
-            itemRepository.delete(itemNotNull.getItemId());
+        Item item = itemRepository.findById(findItemId);
+        if(loginMember.getName().equals(item.getSellerName())&&loginMember!=null&&item!=null) {
+            log.info("deleteItem = {}", item);
+            itemRepository.delete(item.getItemId());
             return "redirect:/items";
         }
         else{
-            model.addAttribute("item", itemNotNull);
+            model.addAttribute("item", item);
             model.addAttribute("deleteError","본인의 제품이 아닐경우 삭제하실 수 없습니다.");
             return "item/item";
         }

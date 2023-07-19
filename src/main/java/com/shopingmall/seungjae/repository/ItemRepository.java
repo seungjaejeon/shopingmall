@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface ItemRepository {
     Item save(Item item);
     Optional<Item> findByName(String name);
+
+    Item findById(Long Id);
     List<Item> findAll();
     void delete(Long deleteId);
     void clearStore();
