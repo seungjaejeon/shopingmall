@@ -1,6 +1,8 @@
 package com.shopingmall.seungjae.controller.Member;
 
 import com.shopingmall.seungjae.domain.Member;
+import com.shopingmall.seungjae.repository.MemberRepository;
+import com.shopingmall.seungjae.repository.MemberRepositoryImpl;
 import com.shopingmall.seungjae.service.LoginService;
 import com.shopingmall.seungjae.service.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,16 +16,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-@Controller  @Slf4j
-@RequestMapping("/member") @RequiredArgsConstructor
+import java.util.Optional;
+
+@Controller
+@Slf4j
+@RequestMapping("/member")
+@RequiredArgsConstructor
 public class ShoppingMallMemberLoginController {
     private final SessionManager sessionManager;
+    MemberRepository memberRepository = new MemberRepositoryImpl();
     private final LoginService loginService;
+
     @GetMapping("/login")
-    public String loginPage(Model model){
+    public String loginPage(Model model) {
         return "login/loginPage";
     }
-//    @PostMapping
+
+    //    @PostMapping
 //    public String login(@RequestParam String loginId, @RequestParam String password, HttpServletResponse response) {
 //        Member member = loginService.login(loginId, password);
 //        log.info("login? {}", member);
@@ -56,24 +65,24 @@ public class ShoppingMallMemberLoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
         return "redirect:/";
 }*/
-@PostMapping("/login")
-public String loginV4(@Valid @ModelAttribute LoginForm form, Model model, @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
+    @PostMapping("/login")
+    public String loginV4(@Valid @ModelAttribute LoginForm form, Model model, @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
 
-    Member loginMember = loginService.login(form.getLoginId(),
-            form.getPassword());
-    log.info("login? {}", loginMember);
-    if (loginMember == null) {
-        model.addAttribute("loginError","아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요.");
-        return "login/loginPage";
+        Member loginMember = loginService.login(form.getLoginId(),
+                form.getPassword());
+        log.info("login? {}", loginMember);
+        if (loginMember == null) {
+            model.addAttribute("loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요.");
+            return "login/loginPage";
 //        bindingResult.addError(new FieldError("login", "loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요"));
+        }
+        //로그인 성공 처리
+        //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
+        HttpSession session = request.getSession();
+        //세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        return "redirect:" + redirectURL;
     }
-    //로그인 성공 처리
-    //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
-    HttpSession session = request.getSession();
-    //세션에 로그인 회원 정보 보관
-    session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-    return "redirect:"+redirectURL;
-}
 
     @PostMapping("/logout")
     public String logoutV3(HttpServletRequest request) {
@@ -83,5 +92,12 @@ public String loginV4(@Valid @ModelAttribute LoginForm form, Model model, @Reque
             session.invalidate();
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/{loginId}")
+    public String userPage(@PathVariable("loginId") String loginId, Model model) {
+        Member member = memberRepository.findByLoginId(loginId).orElse(null);
+        model.addAttribute("member", member);
+        return "userPage";
     }
 }
