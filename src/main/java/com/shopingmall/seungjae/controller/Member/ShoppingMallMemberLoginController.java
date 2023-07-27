@@ -12,8 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class ShoppingMallMemberLoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage() {
         return "login/loginPage";
     }
 

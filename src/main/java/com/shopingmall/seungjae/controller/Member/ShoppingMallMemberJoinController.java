@@ -11,9 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Controller
 @Slf4j @RequestMapping("member/signup") @RequiredArgsConstructor
 public class ShoppingMallMemberJoinController {
