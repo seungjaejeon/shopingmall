@@ -56,6 +56,9 @@
         로그아웃
       </button>
     </form>
+    <div><button type="button" th:onclick="|location.href = '@{/member/{loginId}(loginId=${member.loginId})}'|">
+      내 정보 보기
+    </button></div>
   </div>
 </div>
 </body>

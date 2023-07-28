@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Controller
 @Slf4j @RequiredArgsConstructor
 public class ShoppingMallMainController {
-    private final MemberRepository memberRepository;
-    private final SessionManager sessionManager;
 //    @GetMapping("/")
 //    public String homeLogin(@CookieValue(name = "memberId", required = false) Long memberId, Model model) {
 //        log.info("memberId = {}",memberId);
