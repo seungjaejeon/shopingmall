@@ -60,7 +60,7 @@ public class ShoppingMallItemController {
         return "redirect:/items";
     }
 
-    @GetMapping("/item/{itemId}")
+    @GetMapping("/{itemId}")
     public String ItemInformation(@PathVariable(name = "itemId") Long findItemId, Model model) {
         Item item = itemRepository.findById(findItemId);
         log.info("findItem = {}",item);
@@ -68,7 +68,7 @@ public class ShoppingMallItemController {
         return "item/item";
     }
 
-    @PostMapping("/item/{itemId}")
+    @PostMapping("/{itemId}")
     public String ItemDelete(@PathVariable(name = "itemId") Long findItemId, Model model,
                              @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         Item item = itemRepository.findById(findItemId);

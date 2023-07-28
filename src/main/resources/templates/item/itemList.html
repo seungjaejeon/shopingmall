@@ -42,7 +42,7 @@
         <div class="product-description" th:text="'상품설명: '+${product.itemDescription}"></div>
         <div class="product-id" th:text="'제품 ID: ' + ${product.itemId}"></div>
         <div class="seller-name" th:text="'판매자: ' + ${product.sellerName}"></div>
-        <div><button type="button" th:onclick="|location.href = '@{/items/item/{itemId}(itemId=${product.itemId})}'|">
+        <div><button type="button" th:onclick="|location.href = '@{/items/{itemId}(itemId=${product.itemId})}'|">
             상품 상세보기
         </button></div>
     </li>
