@@ -18,7 +18,7 @@ public class ShoppingMallMemberJoinController {
     @GetMapping
     public String JoinPage(@ModelAttribute Member member, Model model){
         model.addAttribute("member", member);
-        return "join/joinPage";
+        return "member/join/joinPage";
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class ShoppingMallMemberJoinController {
         }
         if(bindingResult.hasErrors()){
             log.info("bindingResult = {}", bindingResult);
-            return "join/joinPage";
+            return "member/join/joinPage";
         }
         memberService.join(member);
         log.info("member={}", member);
@@ -44,6 +44,6 @@ public class ShoppingMallMemberJoinController {
 
     @ExceptionHandler(IllegalStateException.class)
     public String JoinError() {
-        return "join/joinError";
+        return "member/join/joinError";
     }
 }

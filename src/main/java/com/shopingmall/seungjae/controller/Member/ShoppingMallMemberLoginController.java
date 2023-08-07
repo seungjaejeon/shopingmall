@@ -28,7 +28,7 @@ public class ShoppingMallMemberLoginController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login/loginPage";
+        return "member/login/loginPage";
     }
 
     //    @PostMapping
@@ -72,7 +72,7 @@ public class ShoppingMallMemberLoginController {
         log.info("login? {}", loginMember);
         if (loginMember == null) {
             model.addAttribute("loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요.");
-            return "login/loginPage";
+            return "member/login/loginPage";
 //        bindingResult.addError(new FieldError("login", "loginError", "아이디, 비밀번호가 틀렸습니다. 다시 입력해주세요"));
         }
         //로그인 성공 처리

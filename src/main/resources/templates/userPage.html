@@ -65,8 +65,8 @@
         <span th:text="${member.description}"></span>
     </div>
     <div class="button-group">
-        <a href="/user/edit" th:href="@{/user/edit}">수정</a>
-        <a href="/user/delete" th:href="@{/user/delete}">삭제</a>
+        <a href="/user/edit" th:href="@{/member/{loginId}(loginId=${member.loginId})}">수정</a>
+        <a href="/user/delete" th:href="@{/member/{loginId}(loginId=${member.loginId})}}">삭제</a>
     </div>
 </div>
 </body>
