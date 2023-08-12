@@ -2,7 +2,6 @@ package com.shopingmall.seungjae.controller.Member;
 
 import com.shopingmall.seungjae.domain.Member;
 import com.shopingmall.seungjae.repository.MemberRepository;
-import com.shopingmall.seungjae.repository.MemberRepositoryImpl;
 import com.shopingmall.seungjae.service.LoginService;
 import com.shopingmall.seungjae.service.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ShoppingMallMemberLoginController {
     private final SessionManager sessionManager;
-    MemberRepository memberRepository = new MemberRepositoryImpl();
+    private final MemberRepository memberRepository;
     private final LoginService loginService;
 
     @GetMapping("/login")

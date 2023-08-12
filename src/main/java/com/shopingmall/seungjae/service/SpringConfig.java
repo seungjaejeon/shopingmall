@@ -2,10 +2,8 @@ package com.shopingmall.seungjae.service;
 
 import com.shopingmall.seungjae.interceptor.LogInterceptor;
 import com.shopingmall.seungjae.interceptor.LoginCheckInterceptor;
-import com.shopingmall.seungjae.repository.ItemRepository;
-import com.shopingmall.seungjae.repository.ItemRepositoryImpl;
-import com.shopingmall.seungjae.repository.MemberRepository;
-import com.shopingmall.seungjae.repository.MemberRepositoryImpl;
+import com.shopingmall.seungjae.repository.*;
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,13 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SpringConfig implements WebMvcConfigurer {
-//    EntityManager em;
-//    @Autowired
-//    public SpringConfig(EntityManager em){
-//        this.em = em;
-//    }
+    EntityManager em;
+    public SpringConfig(EntityManager em){
+        this.em = em;
+    }
     @Bean
-    public MemberRepository memberRepository(){return new MemberRepositoryImpl();
+    public MemberRepository memberRepository(){return new JpaMemberRepository(em);
     }
     @Bean
     public ItemRepository itemRepository(){
