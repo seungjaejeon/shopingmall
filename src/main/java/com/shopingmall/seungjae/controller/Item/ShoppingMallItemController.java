@@ -4,8 +4,6 @@ import com.shopingmall.seungjae.controller.Member.SessionConst;
 import com.shopingmall.seungjae.domain.Item;
 import com.shopingmall.seungjae.domain.Member;
 import com.shopingmall.seungjae.repository.ItemRepository;
-import com.shopingmall.seungjae.repository.ItemRepositoryImpl;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,7 @@ import java.util.List;
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ShoppingMallItemController {
-    ItemRepository itemRepository = new ItemRepositoryImpl();
+    private final ItemRepository itemRepository;
     @GetMapping
     public String ItemList(Model model) {
         List<Item> items = itemRepository.findAll();
@@ -49,11 +47,10 @@ public class ShoppingMallItemController {
             bindingResult.addError(new FieldError("items","itemDescription", "상품 설명이 올바르지 않습니다."));
         }
         if (bindingResult.hasErrors()) {
-            log.info("상품 추가 오류 발생 bindingResult = {}",bindingResult);
+            log.info("상품 추가 오류 발생 bindingResult = {}", bindingResult);
             return "item/addItemForm";
         }
-        item.setSellerId(loginMember.getLoginId());
-        item.setSellerName(loginMember.getName());
+        item.setMember(loginMember);
         itemRepository.save(item);
         log.info("item add ={}",item);
         return "redirect:/items";
@@ -63,6 +60,7 @@ public class ShoppingMallItemController {
     public String ItemInformation(@PathVariable(name = "itemId") Long findItemId, Model model) {
         Item item = itemRepository.findById(findItemId);
         log.info("findItem = {}",item);
+        model.addAttribute("seller", item.getMember());
         model.addAttribute("item", item);
         return "item/item";
     }
@@ -71,7 +69,8 @@ public class ShoppingMallItemController {
     public String ItemDelete(@PathVariable(name = "itemId") Long findItemId, Model model,
                              @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         Item item = itemRepository.findById(findItemId);
-        if(loginMember.getLoginId().equals(item.getSellerId())&&loginMember.getName().equals(item.getSellerName())&&loginMember!=null&&item!=null) {
+        Member member = item.getMember();
+        if(loginMember.getLoginId().equals(member.getLoginId())&&loginMember!=null&&item!=null) {
             log.info("deleteItem = {}", item);
             itemRepository.delete(item.getItemId());
             return "redirect:/items";

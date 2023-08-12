@@ -19,7 +19,6 @@ public class MemberService {
                 .ifPresent(m->{
                     throw new IllegalStateException();
                 });
-
         memberRepository.save(member); //저장
         return member.getLoginId();
     }

@@ -20,7 +20,7 @@ public class SpringConfig implements WebMvcConfigurer {
     }
     @Bean
     public ItemRepository itemRepository(){
-        return new ItemRepositoryImpl();
+        return new JpaItemRepository(em);
     }
 
 /*

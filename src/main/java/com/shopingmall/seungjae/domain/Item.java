@@ -1,19 +1,21 @@
 package com.shopingmall.seungjae.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Data
+@Data @Entity
 public class Item {
-    @NotEmpty
-    private String itemName;
-    @NotEmpty
-    private Integer price;
-    @NotEmpty
-    private String itemDescription;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     @NotEmpty
-    private String sellerName;
+    private String itemName;
+    @NotNull
+    private int price;
     @NotEmpty
-    private String sellerId;
+    private String itemDescription;
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Member member;
 }
