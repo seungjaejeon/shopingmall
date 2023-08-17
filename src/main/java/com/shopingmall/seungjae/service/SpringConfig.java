@@ -2,7 +2,10 @@ package com.shopingmall.seungjae.service;
 
 import com.shopingmall.seungjae.interceptor.LogInterceptor;
 import com.shopingmall.seungjae.interceptor.LoginCheckInterceptor;
-import com.shopingmall.seungjae.repository.*;
+import com.shopingmall.seungjae.repository.Item.ItemRepository;
+import com.shopingmall.seungjae.repository.Item.JpaItemRepository;
+import com.shopingmall.seungjae.repository.Member.JpaMemberRepository;
+import com.shopingmall.seungjae.repository.Member.MemberRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

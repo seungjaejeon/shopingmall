@@ -1,12 +1,10 @@
 package com.shopingmall.seungjae.service;
 
 import com.shopingmall.seungjae.domain.Member;
-import com.shopingmall.seungjae.repository.MemberRepository;
+import com.shopingmall.seungjae.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Service

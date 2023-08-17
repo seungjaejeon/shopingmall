@@ -1,4 +1,4 @@
-package com.shopingmall.seungjae.repository;
+package com.shopingmall.seungjae.repository.Member;
 
 import com.shopingmall.seungjae.domain.Member;
 import jakarta.persistence.EntityManager;

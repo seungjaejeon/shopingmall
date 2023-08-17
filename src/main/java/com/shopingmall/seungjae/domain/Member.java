@@ -20,5 +20,14 @@ public class Member {
     private String password;
     @NotEmpty
     private String description;
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", loginId='" + loginId + '\'' +
+                // 연관된 엔티티의 정보는 출력하지 않음
+                '}';
+    }
 }
 

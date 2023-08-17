@@ -1,7 +1,7 @@
 package com.shopingmall.seungjae.controller.Member;
 
 import com.shopingmall.seungjae.domain.Member;
-import com.shopingmall.seungjae.repository.MemberRepository;
+import com.shopingmall.seungjae.repository.Member.MemberRepository;
 import com.shopingmall.seungjae.service.LoginService;
 import com.shopingmall.seungjae.service.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 @Slf4j

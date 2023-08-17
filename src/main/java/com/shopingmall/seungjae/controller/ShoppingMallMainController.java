@@ -2,10 +2,6 @@ package com.shopingmall.seungjae.controller;
 
 import com.shopingmall.seungjae.controller.Member.SessionConst;
 import com.shopingmall.seungjae.domain.Member;
-import com.shopingmall.seungjae.repository.MemberRepository;
-import com.shopingmall.seungjae.service.SessionManager;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

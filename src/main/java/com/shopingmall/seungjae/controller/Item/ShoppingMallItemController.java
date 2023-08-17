@@ -3,7 +3,7 @@ package com.shopingmall.seungjae.controller.Item;
 import com.shopingmall.seungjae.controller.Member.SessionConst;
 import com.shopingmall.seungjae.domain.Item;
 import com.shopingmall.seungjae.domain.Member;
-import com.shopingmall.seungjae.repository.ItemRepository;
+import com.shopingmall.seungjae.repository.Item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -76,6 +76,7 @@ public class ShoppingMallItemController {
             return "redirect:/items";
         }
         else{
+            model.addAttribute("seller", item.getMember());
             model.addAttribute("item", item);
             model.addAttribute("deleteError","본인의 제품이 아닐경우 삭제하실 수 없습니다.");
             return "item/item";

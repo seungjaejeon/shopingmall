@@ -1,4 +1,4 @@
-package com.shopingmall.seungjae.repository;
+package com.shopingmall.seungjae.repository.Item;
 
 import com.shopingmall.seungjae.domain.Item;
 import org.springframework.stereotype.Repository;
